@@ -1,1 +1,25 @@
 
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<h2>Dashboard</h2>
+
+<div class="card">
+  <h3>Balance: ₹<span id="balance">0</span></h3>
+</div>
+
+<div class="card">
+  <input id="amount" placeholder="Amount">
+  <button onclick="deposit()">Deposit</button>
+  <button onclick="withdraw()">Withdraw</button>
+</div>
+
+<button onclick="logout()">Logout</button>
+
+<script src="js/app.js"></script>
+</body>
+</html>
