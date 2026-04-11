@@ -1,21 +1,22 @@
-
 require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
+
+require('./models/initDB');
+
+const authRoutes = require('./routes/authRoutes');
+const walletRoutes = require('./routes/walletRoutes');
+const transactionRoutes = require('./routes/transactionRoutes');
 
 const app = express();
 
 app.use(cors());
 app.use(express.json());
 
-const authRoutes = require('./routes/auth');
-const depositRoutes = require('./routes/deposit');
-
 app.use('/api/auth', authRoutes);
-app.use('/api/deposit', depositRoutes);
+app.use('/api/wallet', walletRoutes);
+app.use('/api/tx', transactionRoutes);
 
-app.get('/', (req, res) => {
-  res.send('API Running 🚀');
-});
+app.get('/', (req, res) => res.send("API Running 🚀"));
 
-app.listen(5000, () => console.log("Server running"));
+app.listen(process.env.PORT || 5000);
