@@ -2,14 +2,18 @@ require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 
-// Initialize DB
+// DB init
 require('./models/initDB');
 
 // Routes
 const authRoutes = require('./routes/authRoutes');
 const walletRoutes = require('./routes/walletRoutes');
 const transactionRoutes = require('./routes/transactionRoutes');
-const adminRoutes = require('./routes/adminRoutes'); //
+const adminRoutes = require('./routes/adminRoutes');
+const investmentRoutes = require('./routes/investmentRoutes'); // ✅ Investment
+
+// Cron (daily profit)
+require('./utils/cron'); // ✅ auto earning
 
 const app = express();
 
@@ -21,14 +25,15 @@ app.use(express.json());
 app.use('/api/auth', authRoutes);
 app.use('/api/wallet', walletRoutes);
 app.use('/api/tx', transactionRoutes);
-app.use('/api/admin', adminRoutes); // 
+app.use('/api/admin', adminRoutes);
+app.use('/api/invest', investmentRoutes); // ✅ yaha already add hai
 
-// Test Route
+// Test route
 app.get('/', (req, res) => {
   res.send("API Running 🚀");
 });
 
-// Start Server
+// Start server
 app.listen(process.env.PORT || 5000, () => {
   console.log("Server running 🚀");
 });
